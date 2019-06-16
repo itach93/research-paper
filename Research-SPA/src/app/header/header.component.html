@@ -1,0 +1,126 @@
+<header id="sj-header" class="sj-header sj-haslayout">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+        <div class="sj-topbar">
+          <ul class='sj-socialicons sj-socialiconssimple'>
+            <li class='sj-facebook'><a href='https://www.facebook.com/' target='_blank'><i
+                  class='fa fa-facebook'></i></a></li>
+            <li class='sj-twitter'><a href='https://www.twitter.com/' target='_blank'><i class='fa fa-twitter'></i></a>
+            </li>
+            <li class='sj-linkedin'><a href='https://www.linkedin.com/' target='_blank'><i
+                  class='fa fa-linkedin'></i></a></li>
+            <li class='sj-googleplus'><a href='https://www.google.com/' target='_blank'><i
+                  class='fa fa-google-plus'></i></a></li>
+          </ul>
+          <div class="sj-languagelogin">
+            <div *ngIf="loggedIn()" class="dropdown" dropdown>
+              <span >
+                <img class="rounded-circle userImage" src="{{user_image !== null ? user_image : default_image}}" alt="">
+              </span>
+              <button class="btn btn-secondary dropdown-toggle" type="button" dropdownToggle>
+                Welcome {{authService.decodedToken?.username | titlecase}}
+              </button>
+              <div class="dropdown-menu" *dropdownMenu>
+                <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+                <div class="dropdown-devider"></div>
+                <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+              </div>
+            </div>
+            <div *ngIf="!loggedIn()" class="sj-loginarea">
+              <ul class="sj-loging">
+                <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+                <li><a routerLink="/register" routerLinkActive="active">Register</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sj-navigationarea">
+          <strong class="sj-logo">
+            <a href="http://amentotech.com/projects/journals">
+              <img id="site_logo" src="../../assets/uploads/logo/logo-1547625820.png" alt="Scientific Journal">
+            </a>
+          </strong>
+          <div class="sj-rightarea">
+            <nav id="sj-nav" class="sj-nav navbar-expand-lg">
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="lnr lnr-menu"></i>
+              </button>
+              <div class="collapse navbar-collapse sj-navigation" id="navbarNav">
+                <ul>
+                  <li><a routerLink="/" routerLinkActive="active"><i class="lnr lnr-home"></i></a></li>
+
+                  <li class=" ">
+                    <a routerLink="/upload" routerLinkActive="router-link-active" >About Us</a>
+                  </li>
+                  <li class=" ">
+                    <a href="page/contact-us.html">Aim & Scope</a>
+                  </li>
+                  <li class="menu-item-has-children page_item_has_children custom-active">
+                    <a href="page/explore-latest-researches.html">Publish</a>
+                    <ul class="sub-menu" id="edition_menu">
+                      <li class="">
+                        <a href="edition/1st-edition.html">
+                          Submission Guidelines
+                        </a>
+                      </li>
+                      <li class="">
+                        <a routerLink="/submit" routerLinkActive="active">
+                          Submit Now
+                        </a>
+                      </li>
+                      <li class="">
+                        <a href="edition/3rd-edition.html">
+                          Paper Status
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class=" ">
+                    <a href="page/explore-latest-researches.html">Editorial Board</a>
+                  </li>
+                  <li class="menu-item-has-children page_item_has_children custom-active">
+                    <a href="page/explore-latest-researches.html">Explore</a>
+                    <ul class="sub-menu" id="edition_menu">
+                      <li class="">
+                        <a href="edition/1st-edition.html">
+                          Current Issues
+                        </a>
+                      </li>
+                      <li class="">
+                        <a href="edition/2nd-edition.html">
+                          Archives
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class=" ">
+                    <a href="page/explore-latest-researches.html">Contact</a>
+                  </li>
+                </ul>
+              </div>
+            </nav>
+            <a class="sj-btntopsearch" href="#sj-searcharea">
+              <i class="lnr lnr-magnifier"></i>
+            </a>
+
+            <!-- <a class="sj-btn sj-btnactive" href="login.html"> Submit Your Article</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sj-innerbanner">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="sj-innerbannercontent">
+            <h1>Become A Member</h1>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

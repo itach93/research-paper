@@ -1,0 +1,118 @@
+<main id="sj-main" class="sj-main sj-haslayout sj-sectionspace">
+  <div id="sj-twocolumns" class="sj-twocolumns">
+    <ngx-spinner></ngx-spinner>
+    <div class="container">
+      <!-- <div id='errorMsg' class="row">
+        <p>{{model.username}}</p>
+      </div> -->
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 center">
+          <aside id="sj-sidebarvtwo" class="sj-sidebar">
+            <div class="sj-widget sj-widgetlogin">
+              <div class="sj-widgetheading">
+                <div *ngIf="hasError" class="alert alert-danger" role="alert">
+                  {{errorMsg}}
+                </div>
+                <h3>Login Now</h3>
+              </div>
+              <div class="sj-widgetcontent">
+                <form #loginForm="ngForm" class="sj-formtheme sj-formlogin" (ngSubmit)='login()'>
+                  <fieldset>
+                    <div class="form-group">
+                      <label for="username">Username</label>
+                      <input type="username" name="username" value="" class="form-control " placeholder="Username"
+                        required [(ngModel)]="model.username">
+                      <!-- <div [hidden]="username.valid" class="alert alert-danger">Username is required</div> -->
+                    </div>
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" name="password" class="form-control" placeholder="Password " required
+                        [(ngModel)]="model.password">
+                    </div>
+                    <div class="form-group sj-forgotpass">
+                      <div class="sj-checkbox">
+                        <input type="checkbox" id="remember" name="remember">
+                        <label for="remember">keep me logged in</label>
+                      </div>
+                      <a class="sj-forgorpass" href="password/reset.html">Forgot Password</a>
+                    </div>
+                    <div class="sj-btnarea">
+                      <button [disabled]="!loginForm.valid" type="submit" class="sj-btn sj-btnactive">Login</button>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+          </aside>
+          <a href="#">Register for a new account</a>
+        </div>
+        <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-8">
+          <div id="sj-content" class="sj-content">
+            <div class="sj-registerarea">
+              <div class="registernow">
+                <div class="sj-widgetheading">
+                  <h3>Register Now</h3>
+                </div>
+                <div class="sj-registerformholder">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                      <form method="POST" action="http://amentotech.com/projects/journals/register"
+                        class="sj-formtheme sj-formregister" id="register_form">
+                        <input type="hidden" name="_token" value="H4AiULx8oZY7F26i0N2ylN1xQtnwigjBX9LNsF5d">
+                        <fieldset>
+                          <div class="form-group">
+                            <input id="name" type="text" class="form-control" name="name" value=""
+                              placeholder="First Name" required>
+                          </div>
+                          <div class="form-group">
+                            <input type="text" name="sur_name" value="" class="form-control" placeholder="Sur Name*"
+                              required>
+                          </div>
+                          <div class="form-group">
+                            <input id="email" type="email" class="form-control " name="email" value=""
+                              placeholder="Email*" required>
+                          </div>
+                          <div class="form-group">
+                            <input id="password" type="password" class="form-control" name="password"
+                              placeholder="Password" required>
+                          </div>
+                          <div class="form-group">
+                            <input id="password-confirm" type="password" class="form-control"
+                              name="password_confirmation" placeholder="Confirm Password*" required>
+                          </div>
+                          <div class="form-group half-width assign-role">
+                            <span class="sj-radio">
+                              <input id="author" checked="checked" name="role" type="radio" value="author">
+                              <label for="author">Author</label>
+                            </span>
+                          </div>
+                          <div class="form-group half-width assign-role">
+                            <span class="sj-radio">
+                              <input id="reader" name="role" type="radio" value="reader">
+                              <label for="reader">Reader</label>
+                            </span>
+                          </div>
+                          <div class="form-group">
+                            <div class="sj-checkbox">
+                              <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
+                                value="registered">
+                              <label for="terms_condition">By registering, you accept our <a
+                                  href="javascript:void(0);">Terms &amp; Conditions</a></label>
+                            </div>
+                          </div>
+                          <div class="sj-btnarea">
+                            <button type="submit" class="sj-btn sj-btnactive">Register</button>
+                          </div>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</main>

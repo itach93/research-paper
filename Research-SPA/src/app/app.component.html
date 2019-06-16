@@ -1,0 +1,8 @@
+<div id="sj-wrapper" class="sj-wrapper">
+  <div class="sj-contentwrapper">
+    <app-header></app-header>
+    <app-content *ngIf="router.url == '/'"></app-content>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+  </div>
+</div>

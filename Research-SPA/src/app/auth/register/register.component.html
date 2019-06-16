@@ -1,0 +1,133 @@
+<main id="sj-main" class="sj-main sj-haslayout sj-sectionspace">
+  <div id="sj-twocolumns" class="sj-twocolumns">
+    <ngx-spinner></ngx-spinner>
+    <div class="container">
+      <!-- <div id='errorMsg' class="row">
+          <p>{{model.username}}</p>
+        </div> -->
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+          <div id="sj-content" class="sj-content">
+            <div class="sj-registerarea">
+              <div class="registernow">
+                <div class="sj-widgetheading">
+                  <div *ngIf="hasError" class="alert alert-danger" role="alert">
+                    {{errorMsg}}
+                  </div>
+                  <h3>Register Now</h3>
+                </div>
+                <div class="sj-registerformholder">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+                      <form [formGroup]="registerForm" (ngSubmit)="register()" class="sj-formtheme">
+                        <fieldset>
+                          <div class="form-group">
+                            <div class="form-group">
+                              <label class="control-label" style="margin-right:10px">I am a: </label>
+                              <input type="radio" formControlName="gender" value="M" class="form-radio">
+                              <label for="male">Male</label>
+                              <input type="radio" formControlName="gender" value="F" class="form-radio">
+                              <label for="female">Female</label>
+                            </div>
+                            <div class="form-group">
+                              <label for="username">Username<span style="color: red">*</span></label>
+                              <input type="text"
+                                [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}"
+                                class="form-control" formControlName="username" placeholder="Username">
+                              <div class="invalid-feedback">Please enter a username</div>
+                            </div>
+                            <div class="form-group">
+                              <label for="email">Email<span style="color: red">*</span></label>
+                              <input type="email"
+                                [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
+                                class="form-control" formControlName="email" placeholder="Email*">
+                              <div class="invalid-feedback">Please enter your email</div>
+                            </div>
+                            <label for="firstname">First Name<span style="color: red">*</span></label>
+                            <input type="text"
+                              [ngClass]="{'is-invalid': registerForm.get('firstname').errors && registerForm.get('firstname').touched}"
+                              formControlName="firstname" class="form-control" placeholder="First Name">
+                            <div class="invalid-feedback">Please enter your first name</div>
+                          </div>
+                          <div class="form-group">
+                            <label for="lastname">Last Name<span style="color: red">*</span></label>
+                            <input type="text"
+                              [ngClass]="{'is-invalid': registerForm.get('lastname').errors && registerForm.get('lastname').touched}"
+                              class="form-control" formControlName="lastname" placeholder="Lastname">
+                            <div class="invalid-feedback">Please enter your last name</div>
+                          </div>
+                          <div class="form-group">
+                            <label for="dbirth">Date of Birth<span style="color: red">*</span></label>
+                            <input
+                              [ngClass]="{'is-invalid': registerForm.get('dbirth').errors && registerForm.get('dbirth').touched}"
+                              class="form-control" placeholder="Date of Birth" formControlName="dbirth" type="text"
+                              bsDatepicker [bsConfig]="bsConfig">
+                            <div class="invalid-feedback"
+                              *ngIf="registerForm.get('dbirth').touched && registerForm.get('dbirth').hasError('required')">
+                              Date of Birth is required</div>
+                          </div>
+                          <div class="form-group">
+                            <label for="password">Password<span style="color: red">*</span></label>
+                            <input type="password"
+                              [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"
+                              class="form-control" formControlName="password" placeholder="Password">
+                            <div class="invalid-feedback"
+                              *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+                              Password is required
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+                              Password must be at least 4 characters
+                            </div>
+                            <div class="invalid-feedback"
+                              *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+                              Password cannot exceed 8 characters
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="confirmPassword">Confirm Password<span style="color: red">*</span></label>
+                            <input type="password"
+                              [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors && registerForm.get('confirmPassword').touched 
+                                || registerForm.get('confirmPassword').hasError('required') && registerForm.hasError('mismatch')}"
+                              class="form-control" formControlName="confirmPassword" placeholder="Confirm Password">
+                            <div class="invalid-feedback" *ngIf="registerForm.get('password').hasError('maxlength') 
+                                && registerForm.get('password').touched">Password is required
+                            </div>
+                            <div class="invalid-feedback" *ngIf="registerForm.hasError('mismatch') 
+                                  && registerForm.get('confirmPassword').touched">Password must match
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <label for="confirmPassword">Choose profile image</label>
+                            <input type="file" formControlName="user_image" class="form-control"
+                              (change)="onFileChanged($event)">
+                            <!-- <input style="display: none" type="file" (change)="onFileChanged($event)" #fileInput>
+                            <button (click)="fileInput.click()">Select File</button> -->
+                          </div>
+                          <div class="form-group">
+                            <div class="sj-checkbox">
+                              <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
+                                value="registered">
+                              <label for="terms_condition">By registering, you accept our <a
+                                  href="javascript:void(0);">Terms &amp; Conditions</a></label>
+                            </div>
+                          </div>
+                          <div class="sj-btnarea">
+                            <button type="submit" class="sj-btn sj-btnactive">Register</button>
+                          </div>
+                        </fieldset>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-4">
+          <img src="../../../assets/uploads/slider/images/fronimg.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
