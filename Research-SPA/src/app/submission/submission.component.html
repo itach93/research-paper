@@ -1,0 +1,184 @@
+<main id="sj-main" class="sj-main sj-haslayout sj-sectionspace">
+  <div id="sj-twocolumns" class="sj-twocolumns">
+    <ngx-spinner></ngx-spinner>
+    <div class="container">
+      <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <ng-template matStepLabel>Author Details</ng-template>
+          <div class="row">
+            <form [formGroup]="firstFormGroup" class="sj-formtheme">
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="Title">Title</label>
+                  <select class="form-control">
+                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
+                    <option value="" selected>Choose</option>
+                    <option value="">...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="lastname">Username<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="username" placeholder="Username">
+                    <div class="invalid-feedback">Please enter your last name</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="email" placeholder="email">
+                    <div class="invalid-feedback">Please enter your last Email</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="firstname">Firstname<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="firstname" placeholder="firstname">
+                    <div class="invalid-feedback">Please enter your first name</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">Last Name<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name">
+                    <div class="invalid-feedback">Please enter your Last Name</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="phone">Phone Number<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number">
+                    <div class="invalid-feedback">Please enter your Phone Number</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="address">Address<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" formControlName="address" placeholder="Address">
+                    <div class="invalid-feedback">Please enter your Address</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" formControlName="country" placeholder="Country">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" formControlName="city" placeholder="City">
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="zip">Zip Code</label>
+                  <input type="text" class="form-control" formControlName="zip" placeholder="zip">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="institute">Institute</label>
+                  <input type="text" class="form-control" formControlName="institute" placeholder="Institute">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="Department">Department</label>
+                  <select class="form-control">
+                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
+                    <option value="" selected>Choose</option>
+                    <option value="">...</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-secondary" matStepperNext>Next&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <ng-template matStepLabel>Manuscript Information</ng-template>
+          <div class="row">
+            <form [formGroup]="secondFormGroup" class="sj-formtheme">
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="Title">Subject Area</label>
+                  <select class="form-control">
+                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
+                    <option value="" selected>Choose</option>
+                    <option value="">...</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="title">Title</label>
+                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-6">
+                  <label for="coauthor">Co-Authors(If have Any)</label>
+                  <input type="text" class="form-control" placeholder="Co-Authors(If have Any)"
+                    formControlName="coauthor">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-8">
+                  <label for="abstract">Abstract</label>
+                  <textarea type="text" class="form-control" formControlName="abstract"
+                    placeholder="Abstract"></textarea>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="keywords"></label>
+                  <input type="text" (keydown.enter)="addKeyword($event)" class="form-control" formControlName="keywords" placeholder="Keywords">
+                </div>
+              </div>
+              <div class="form-row" *ngIf="keywords.length > 0">
+                <div class="col-md-2" *ngFor="let key of keywords">
+                  {{key}}
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="">Upload your manuscript</label>
+                  <input type="file" class="form-control">
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-secondary" matStepperPrevious><i class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
+                <button class="btn btn-secondary" matStepperNext>Next&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+              </div>
+            </form>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <div class="sj-checkbox">
+                <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
+                  value="registered">
+                <label for="terms_condition">By this submiting, you have read and agree to <a href="javascript:void(0);">Terms &amp;
+                    Conditions</a></label>
+              </div>
+            </div>
+            <div class="form-group col-md-6">
+                <div class="sj-checkbox">
+                  <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
+                    value="registered">
+                  <label for="terms_condition">The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest</label>
+                </div>
+              </div>
+            <div class="sj-btnarea">
+              <button type="submit" class="sj-btn sj-btnactive">Submit</button>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-secondary" matStepperPrevious><i class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
+            <button class="btn btn-secondary" (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
+  </div>
+</main>

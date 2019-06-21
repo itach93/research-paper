@@ -4,14 +4,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ContentComponent } from './content/content.component';
-// import { SubmissionComponent } from './submission/submission.component';
+import { SubmissionComponent } from './submission/submission.component';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'ContentComponent', pathMatch: 'full' },
   { path: 'home', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  // { path: 'submit', component: SubmissionComponent },
+  { path: 'submit', component: SubmissionComponent },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
