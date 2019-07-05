@@ -13,6 +13,10 @@ exports.createPaper = async (data) => {
             throw new Error('This title alredy exist !!');
         }
 
+        if(data.user_id === undefined || data.user_id === '') {
+            throw new Error('A user must be attached to paper');
+        }
+
         ref_number = await generate(data.title);
         const _ref_number = await PaperModel.findOne({
             where: {

@@ -17,6 +17,8 @@ export interface User {
     department?: string;
     postal_code?: string;
     about_yourself?: string;
+    address?: string;
+    zip?: string;
     cv?: string;
     user_image?: string;
 }

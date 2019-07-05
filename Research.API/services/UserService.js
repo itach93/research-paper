@@ -2,7 +2,9 @@ const UserModel = require('../models').User;
 
 exports.getUsers = async () => {
     try {
-        return await UserModel.findAll();
+        return await UserModel.findAll({
+            attributes: { exclude: ["password", "createdAt", "updatedAt"] }
+        });
     } catch (error) {
         console.log(error);
         throw error;
@@ -14,7 +16,8 @@ exports.getUserById = async (id) => {
         return await UserModel.findOne({
             where: {
                 id
-            }
+            },
+            attributes: { exclude: ["password", "createdAt", "updatedAt"] }
         });
     } catch (error) {
         console.log(error);

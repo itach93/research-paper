@@ -24,7 +24,7 @@ export class AuthService {
   }
 
   login(model: any) {
-    return this.http.post(this.baseUrl + 'api/auth/login', model).pipe(
+    return this.http.post(this.baseUrl + 'auth/login', model).pipe(
       map((response: any) => {
         const user = response;
         if (user) {
@@ -42,7 +42,11 @@ export class AuthService {
   }
 
   register(user) {
-    return this.http.post(this.baseUrl + 'api/auth/register', user);
+    return this.http.post(this.baseUrl + 'auth/register', user);
+  }
+
+  update(id, user) {
+    return this.http.put(this.baseUrl + 'users/' + id, user);
   }
 
   loggedIn() {

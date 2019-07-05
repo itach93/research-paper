@@ -9,36 +9,43 @@
             <form [formGroup]="firstFormGroup" class="sj-formtheme">
               <div class="form-row">
                 <div class="form-group col-md-3">
-                  <label for="Title">Title</label>
-                  <select class="form-control">
-                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
-                    <option value="" selected>Choose</option>
-                    <option value="">...</option>
+                  <label for="Title">Title<span style="color: red">*</span></label>
+                  <select class="form-control" formControlName="title"
+                    [ngClass]="{'is-invalid': firstFormGroup.get('title').errors && firstFormGroup.get('title').touched}">
+                    <option *ngFor="let title of titles" [value]="title">{{title}}
                   </select>
+                  <div class="invalid-feedback">Please choose a title</div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
                     <label for="lastname">Username<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" formControlName="username" placeholder="Username">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': firstFormGroup.get('username').errors && firstFormGroup.get('username').touched}"
+                      formControlName="username" placeholder="Username">
                     <div class="invalid-feedback">Please enter your last name</div>
                   </div>
                   <div class="form-group">
                     <label for="email">Email<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" formControlName="email" placeholder="email">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': firstFormGroup.get('email').errors && firstFormGroup.get('email').touched}"
+                      formControlName="email" placeholder="email">
                     <div class="invalid-feedback">Please enter your last Email</div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
                     <label for="firstname">Firstname<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" formControlName="firstname" placeholder="firstname">
+                    <input type="text" class="form-control"
+                      [ngClass]="{'is-invalid': firstFormGroup.get('firstname').errors && firstFormGroup.get('firstname').touched}"
+                      formControlName="firstname" placeholder="firstname">
                     <div class="invalid-feedback">Please enter your first name</div>
                   </div>
                   <div class="form-group">
                     <label for="lastname">Last Name<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name">
+                    <input type="text" class="form-control" formControlName="lastname" placeholder="Last Name"
+                      [ngClass]="{'is-invalid': firstFormGroup.get('lastname').errors && firstFormGroup.get('lastname').touched}">
                     <div class="invalid-feedback">Please enter your Last Name</div>
                   </div>
                 </div>
@@ -46,14 +53,19 @@
               <div class="form-row">
                 <div class="col">
                   <div class="form-group">
-                    <label for="phone">Phone Number<span style="color: red">*</span></label>
-                    <input type="text" class="form-control" formControlName="phone" placeholder="Phone Number">
+                    <label for="phone">Phone Number<span style="color: red">*</span></label><br>
+                    <!-- <ngx-intl-tel-input [cssClass]="'custom'" formControlName="phone" separateDialCode="true"
+                      [ngClass]="{'is-invalid': firstFormGroup.get('phone').errors && firstFormGroup.get('phone').touched}"
+                      [enableAutoCountrySelect]="true" [enablePlaceholder]="true"></ngx-intl-tel-input> -->
+                      <input type="number" class="form-control" formControlName="phone" placeholder="+254 789 435 786"
+                        [ngClass]="{'is-invalid': firstFormGroup.get('phone').errors && firstFormGroup.get('phone').touched}">
+                      <label style="font-size: 9px;">Begin by contry code. Ex: +254</label>
                     <div class="invalid-feedback">Please enter your Phone Number</div>
                   </div>
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    <label for="address">Address<span style="color: red">*</span></label>
+                    <label for="address">Address</label>
                     <input type="text" class="form-control" formControlName="address" placeholder="Address">
                     <div class="invalid-feedback">Please enter your Address</div>
                   </div>
@@ -81,17 +93,116 @@
                 <div class="form-group col-md-4">
                   <label for="Department">Department</label>
                   <select class="form-control">
-                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
-                    <option value="" selected>Choose</option>
-                    <option value="">...</option>
+                    <option *ngFor="let dep of departments" [value]="dep">{{dep}}</option>
                   </select>
                 </div>
               </div>
               <div>
-                <button class="btn btn-secondary" matStepperNext>Next&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+                <button class="btn btn-secondary" matStepperNext (click)="validateAllFormFields(firstFormGroup)">Next&nbsp;
+                  <i class="fa fa-arrow-circle-right"></i></button>
               </div>
             </form>
           </div>
+
+          <!-- <div class="row">
+            <form #editUserForm="ngForm" class="sj-formtheme" (ngSubmit)="submitPaper()">
+              <div class="form-row">
+                <div class="form-group col-md-3">
+                  <label for="Title">Title<span style="color: red">*</span></label>
+                  <select class="form-control" name="title" [(ngModel)]="currentUser.title" required #title="ngModel">
+                    <option *ngFor="let title of titles" [value]="title">{{title}}
+                  </select>
+                  <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Title is required
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="lastname">Username<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="username" [(ngModel)]="currentUser.username" required
+                      placeholder="Username" #username="ngModel">
+                    <div [hidden]="username.valid || username.pristine" class="alert alert-danger">Username is required
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="email" required placeholder="email"
+                      [(ngModel)]="currentUser.email" #email="ngModel">
+                    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Email is required</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="firstname">Firstname<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="firstname" placeholder="firstname" required
+                      [(ngModel)]="currentUser.firstname" #firstname="ngModel">
+                    <div [hidden]="firstname.valid || firstname.pristine" class="alert alert-danger">Please enter your
+                      first name</div>
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">Last Name<span style="color: red">*</span></label>
+                    <input type="text" class="form-control" name="lastname" placeholder="Last Name" required
+                      [(ngModel)]="currentUser.lastname" #lastname="ngModel">
+                    <div [hidden]="lastname.valid || lastname.pristine" class="alert alert-danger">Please enter your
+                      Last Name</div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="phone">Phone Number<span style="color: red">*</span></label><br>
+                    <ngx-intl-tel-input [cssClass]="'custom'" [enableAutoCountrySelect]="true"
+                      [enablePlaceholder]="true" name="phoneObject" [(ngModel)]="phoneObject" required #phone="ngModel">
+                    </ngx-intl-tel-input>
+                    <br><label style="font-size: 9px;">Choose the country and enter your number</label>
+                    <div [hidden]="phone.valid || phone.pristine" class="alert alert-danger">Please enter your Phone
+                      Number</div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" name="address" placeholder="Address"
+                      [(ngModel)]="currentUser.address">
+                  </div>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="country">Country</label>
+                  <input type="text" class="form-control" name="country" placeholder="Country"
+                    [(ngModel)]="currentUser.country">
+                </div>
+                <div class="form-group col-md-3">
+                  <label for="city">City</label>
+                  <input type="text" class="form-control" name="city" placeholder="City" [(ngModel)]="currentUser.city">
+                </div>
+                <div class="form-group col-md-2">
+                  <label for="zip">Zip Code</label>
+                  <input type="text" class="form-control" name="zip" placeholder="zip" [(ngModel)]="currentUser.zip">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col-md-4">
+                  <label for="institute">Institute</label>
+                  <input type="text" class="form-control" name="institute" placeholder="Institute"
+                    [(ngModel)]="currentUser.institute">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="Department">Department</label>
+                  <select class="form-control">
+                    <option *ngFor="let dep of departments" [value]="dep">{{dep}}</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-secondary" matStepperNext [disabled]="!editUserForm.form.valid">Next&nbsp;<i
+                    class="fa fa-arrow-circle-right"></i></button>
+              </div>
+            </form>
+          </div> -->
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
           <ng-template matStepLabel>Manuscript Information</ng-template>
@@ -99,18 +210,21 @@
             <form [formGroup]="secondFormGroup" class="sj-formtheme">
               <div class="form-row">
                 <div class="form-group col-md-3">
-                  <label for="Title">Subject Area</label>
-                  <select class="form-control">
-                    <!-- <option *ngFor="let item of list" [value]="item">{{item}}</!--> -->
-                    <option value="" selected>Choose</option>
-                    <option value="">...</option>
+                  <label for="Title">Subject Area<span style="color: red">*</span></label>
+                  <select class="form-control" formControlName="area"
+                    [ngClass]="{'is-invalid': secondFormGroup.get('area').errors && secondFormGroup.get('area').touched}">
+                    <option *ngFor="let area of areas" [value]="area.name">{{area.name}}</option>
                   </select>
+                  <div class="invalid-feedback">Choose a paper area</div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-6">
-                  <label for="title">Title</label>
-                  <input type="text" class="form-control" formControlName="title" placeholder="Title">
+                  <label for="title">Title<span style="color: red">*</span></label>
+                  <input type="text" class="form-control" formControlName="title"
+                    [ngClass]="{'is-invalid': secondFormGroup.get('title').errors && secondFormGroup.get('title').touched}"
+                    placeholder="Title">
+                  <div class="invalid-feedback">Title is required</div>
                 </div>
               </div>
               <div class="form-row">
@@ -122,31 +236,40 @@
               </div>
               <div class="form-row">
                 <div class="form-group col-md-8">
-                  <label for="abstract">Abstract</label>
-                  <textarea type="text" class="form-control" formControlName="abstract"
-                    placeholder="Abstract"></textarea>
+                  <label for="abstract">Abstract<span style="color: red">*</span></label>
+                  <textarea type="text" class="form-control" formControlName="abstract" placeholder="Abstract"
+                    [ngClass]="{'is-invalid': secondFormGroup.get('abstract').errors && secondFormGroup.get('abstract').touched}">
+                  </textarea>
+                  <div class="invalid-feedback">Abstract is required</div>
                 </div>
               </div>
               <div class="form-row">
                 <div class="form-group col-md-4">
-                  <label for="keywords"></label>
-                  <input type="text" (keydown.enter)="addKeyword($event)" class="form-control" formControlName="keywords" placeholder="Keywords">
+                  <label for="keywords">Keywords<span style="color: red">*</span></label>
+                  <input type="text" (keypress)="addKeyword($event)" class="form-control" formControlName="keywords"
+                    [ngClass]="{'is-invalid': secondFormGroup.get('keywords').errors && secondFormGroup.get('keywords').touched}"
+                    placeholder="Type a keyword and press Enter to add another one">
+                  <div class="invalid-feedback">Keywords are required!</div>
                 </div>
               </div>
               <div class="form-row" *ngIf="keywords.length > 0">
-                <div class="col-md-2" *ngFor="let key of keywords">
-                  {{key}}
+                <div *ngFor="let key of keywords">
+                    <button type="button" class="btn btn-info" (click)="removeKeywords(key)"><i class="fa fa-times"></i>{{key}}</button>&nbsp;
                 </div>
               </div>
-              <div class="form-row">
+              <div class="form-row" style="margin-top: 20px;">
                 <div class="form-group col-md-4">
-                  <label for="">Upload your manuscript</label>
-                  <input type="file" class="form-control">
+                  <label for="">Upload your manuscript<span style="color: red">*</span></label>
+                  <input type="file" class="form-control" formControlName="manuscript" (change)="onFileChanged($event)"
+                    [ngClass]="{'is-invalid': secondFormGroup.get('manuscript').errors && secondFormGroup.get('manuscript').touched}">
+                  <div class="invalid-feedback">A File is required</div>
                 </div>
               </div>
               <div>
-                <button class="btn btn-secondary" matStepperPrevious><i class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
-                <button class="btn btn-secondary" matStepperNext>Next&nbsp;<i class="fa fa-arrow-circle-right"></i></button>
+                <button class="btn btn-secondary" matStepperPrevious><i
+                    class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
+                <button class="btn btn-secondary" matStepperNext (click)="validateAllFormFields(secondFormGroup)">Next&nbsp;
+                  <i class="fa fa-arrow-circle-right"></i></button>
               </div>
             </form>
           </div>
@@ -158,23 +281,27 @@
               <div class="sj-checkbox">
                 <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
                   value="registered">
-                <label for="terms_condition">By this submiting, you have read and agree to <a href="javascript:void(0);">Terms &amp;
-                    Conditions</a></label>
+                <label for="terms_condition">By this submiting, you have read and agree to <a
+                    href="javascript:void(0);">Terms &amp;
+                    Conditions<span style="color: red">*</span></a></label>
               </div>
             </div>
             <div class="form-group col-md-6">
-                <div class="sj-checkbox">
-                  <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
-                    value="registered">
-                  <label for="terms_condition">The authors declare that the research was conducted in the absence of any commercial or financial relationships that could be construed as a potential conflict of interest</label>
-                </div>
+              <div class="sj-checkbox">
+                <input type="checkbox" id="terms_condition" name="terms_condition" class="form-control"
+                  value="registered">
+                <label for="terms_condition">The authors declare that the research was conducted in the absence of any
+                  commercial or financial relationships that could be construed as a potential conflict of
+                  interest<span style="color: red">*</span></label>
               </div>
+            </div>
             <div class="sj-btnarea">
-              <button type="submit" class="sj-btn sj-btnactive">Submit</button>
+              <button type="submit" class="sj-btn sj-btnactive" (click)="submitPaper()" style="margin-bottom: 30px;">Submit</button>
             </div>
           </div>
           <div>
-            <button class="btn btn-secondary" matStepperPrevious><i class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
+            <button class="btn btn-secondary" matStepperPrevious><i
+                class="fa fa-arrow-circle-left"></i>&nbsp;Back</button>&nbsp;
             <button class="btn btn-secondary" (click)="stepper.reset()">Reset</button>
           </div>
         </mat-step>

@@ -12,6 +12,16 @@ exports.createArea = async (req, res, next) => {
     }
 }
 
+exports.allAreas = async (req, res, next) => {
+    try {
+        req.data = await areaService.allAreas();
+        next();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 exports.deleteArea = async (req, res, next) => {
     try {
         const { id } = req.body;

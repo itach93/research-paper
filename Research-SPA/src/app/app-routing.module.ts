@@ -5,13 +5,22 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ContentComponent } from './content/content.component';
 import { SubmissionComponent } from './submission/submission.component';
+import { AuthGuard } from './_guards/auth.guard';
+import { UserDetailResolver } from './_resolvers/user-detail.resolver';
+import { PaperAreaResolver } from './_resolvers/paper-area.resolver';
 
 const routes: Routes = [
   // { path: '', redirectTo: 'ContentComponent', pathMatch: 'full' },
   { path: 'home', component: ContentComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'submit', component: SubmissionComponent },
+  {
+    path: 'submit', component: SubmissionComponent, canActivate: [AuthGuard], resolve:
+    {
+      user: UserDetailResolver,
+      area: PaperAreaResolver
+    }
+  },
   { path: '**', redirectTo: 'home', pathMatch: 'full' }
 ];
 
@@ -20,7 +29,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forRoot(routes)
   ],
-  exports: [ RouterModule ],
+  exports: [RouterModule],
   declarations: []
 })
 export class AppRoutingModule { }

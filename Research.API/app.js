@@ -27,14 +27,14 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/uploads/', express.static('uploads'));
+app.use('/api/uploads/', express.static('uploads'));
 
 // app.use(express.static(path.join(__dirname + '/uploads')));
 // app.use( express.static(__dirname + 'uploads'));
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/papers', paperRoutes);
+app.use('/api', authRoutes, paperRoutes, userRoutes);
+// app.use('/api/users', userRoutes);
+// app.use('/api/papers', paperRoutes);
 
 // Run server & Connection to database
 models.sequelize.authenticate()
