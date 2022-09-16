@@ -23,7 +23,7 @@
     "@angular/router": "~8.0.1",
     "@auth0/angular-jwt": "^2.1.0",
     "alertifyjs": "^1.11.3",
-    "bootstrap": "^4.0.0",
+    "bootstrap": "^4.3.1",
     "font-awesome": "^4.7.0",
     "google-libphonenumber": "^3.2.2",
     "intl-tel-input": "^15.1.2",
